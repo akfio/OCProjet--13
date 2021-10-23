@@ -1,0 +1,1 @@
+worker: gunicorn oc_lettings_site.wsgi
