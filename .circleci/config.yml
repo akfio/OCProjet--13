@@ -1,0 +1,34 @@
+version: 2.1
+orbs:
+  python: circleci/python@1.2
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Run tests
+          command: pytest
+
+  deploy-dev:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build and push Docker image to Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push web -a oc-lettings-8
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web oc-lettings-8
+
+
+workflows:
+  workflow:
+    jobs:
+      - build-and-test
+      - deploy-dev
