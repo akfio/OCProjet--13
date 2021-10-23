@@ -14,7 +14,7 @@ jobs:
           name: Run tests
           command: pytest
 
-  deploy-dev:
+  deploy-to-Heroku:
     machine: true
     steps:
       - checkout
@@ -24,11 +24,11 @@ jobs:
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push web -a oc-lettings-8
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web oc-lettings-8
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web -a=oc-lettings-8
 
 
 workflows:
   workflow:
     jobs:
       - build-and-test
-      - deploy-dev
+      - deploy-to-heroku
