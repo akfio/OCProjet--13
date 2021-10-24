@@ -27,7 +27,7 @@ jobs:
       - run:
           name : Build docker image
           command: |
-              docker build -t akfio/oc-lettings-8
+              docker build -t akfio/oc-lettings-8 .
       - deploy:
           name: Push to DockerHub
           command: |
