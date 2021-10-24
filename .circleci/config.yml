@@ -56,6 +56,6 @@ workflows:
       - deploy-to-Heroku:
           requires:
             - build-push-image-DockerHub
-            filters:
-              branches:
-                only: master
+          filters:
+            branches:
+              only: master
