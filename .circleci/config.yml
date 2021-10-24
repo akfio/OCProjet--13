@@ -45,9 +45,9 @@ jobs:
           command: |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            heroku stack:set heroku-20 -a=oc-lettings-8
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push web -a oc-lettings-8
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web -a=oc-lettings-8
-            heroku stack:set heroku-20 -a=oc-lettings-8
 
 
 workflows:
