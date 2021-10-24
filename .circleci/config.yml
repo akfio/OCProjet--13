@@ -48,6 +48,8 @@ jobs:
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push web -a oc-lettings-8
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web -a=oc-lettings-8
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku stack:set heroku-20 -a=oc-lettings-8
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set ENV=PRODUCTION
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SECRET_KEY="d@n%u@98tun=@j188g25b8ynh1dqto-v%81))gxbbmu$=dy_*)"
 
 
 workflows:
