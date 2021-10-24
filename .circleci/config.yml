@@ -21,9 +21,11 @@ jobs:
       - image: cimg/python:3.8
     steps:
       - checkout
+      - python/install-packages:
+          pkg-manager: pip
       - setup_remote_docker
       - run:
-          name : Build dovker image
+          name : Build docker image
           command: |
               docker build -t akfio/oc-lettings-8
       - deploy:
