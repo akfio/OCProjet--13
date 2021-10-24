@@ -24,7 +24,7 @@ jobs:
       - setup_remote_docker
       - docker/build:
           - name: akfio/oc-lettings-8
-          - extra_build_args: "-t akfio/oc-lettings-8"
+          - extra_build_args: -t akfio/oc-lettings-8
       - docker/push:
           image: akfio/oc-lettings-8
           tag: "latest"
