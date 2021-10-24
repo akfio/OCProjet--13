@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   python: circleci/python@1.2
+  docker: circleci/docker@1.7.0
 
 jobs:
   build-and-test:
@@ -13,6 +14,21 @@ jobs:
       - run:
           name: Run tests
           command: pytest
+
+
+  build-push-image-DockerHub:
+    docker:
+        - image: cimg/python:3.8
+    steps:
+      - checkout
+      - setup_remote_docker
+      - docker/build:
+          - name: akfio/oc-lettings-8
+          - extra_build_args: "-t akfio/oc-lettings-8"
+      - docker/push:
+          image: akfio/oc-lettings-8
+          tag: "latest"
+
 
   deploy-to-Heroku:
     machine: true
@@ -31,4 +47,15 @@ workflows:
   workflow:
     jobs:
       - build-and-test
-      - deploy-to-Heroku
+      - build-push-image-DockerHub:
+          requires:
+              - build-and-test
+          filters:
+            branches:
+              only: master
+      - deploy-to-Heroku:
+          requires:
+            - build-push-image-DockerHub
+            filters:
+              branches:
+                only: master
