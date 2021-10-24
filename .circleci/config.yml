@@ -47,14 +47,14 @@ workflows:
     jobs:
       - build-and-test
       - build-push-image-DockerHub:
-          requires:
-              - build-and-test
-          filters:
-            branches:
-              only: master
+            requires:
+                - build-and-test
+            filters:
+              branches:
+                only: master
       - deploy-to-Heroku:
-          requires:
-            - build-push-image-DockerHub
-          filters:
-            branches:
-              only: master
+            requires:
+              - build-push-image-DockerHub
+            filters:
+              branches:
+                only: master
