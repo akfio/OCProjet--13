@@ -17,16 +17,21 @@ jobs:
 
 
   build-push-image-DockerHub:
-    executor: docker/docker
+    docker:
+      - image: cimg/python:3.8
     steps:
       - checkout
       - setup_remote_docker
-      - docker/build:
-          - name: akfio/oc-lettings-8
-          - extra_build_args: '-t akfio/oc-lettings-8'
-      - docker/push:
-          image: akfio/oc-lettings-8
-          tag: "latest"
+      - run:
+          name : Build dovker image
+          command: |
+              docker build -t akfio/oc-lettings-8
+      - deploy:
+          name: Push to DockerHub
+          command: |
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker push akfio/oc-lettings-8
+
 
 
   deploy-to-Heroku:
