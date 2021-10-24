@@ -17,16 +17,13 @@ jobs:
 
 
   build-push-image-DockerHub:
-    docker:
-        - image: cimg/python:3.8
+    executor: docker/docker
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
       - setup_remote_docker
       - docker/build:
           - name: akfio/oc-lettings-8
-          - extra_build_args: -t akfio/oc-lettings-8
+          - extra_build_args: '-t akfio/oc-lettings-8'
       - docker/push:
           image: akfio/oc-lettings-8
           tag: "latest"
