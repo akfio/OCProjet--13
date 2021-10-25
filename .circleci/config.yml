@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   python: circleci/python@1.2
   docker: circleci/docker@1.7.0
-  heroku: circleci/heroku@1.2.6
 
 jobs:
   build-and-test:
@@ -41,18 +40,19 @@ jobs:
             docker push $DOCKER_LOGIN/oc-lettings-8:latest
 
   deploy-to-Heroku:
-    executor: heroku/default
+    machine: true
     steps:
       - checkout
-      - heroku/install
-      - run: heroku maintenance:on --app $HEROKU_APP_NAME
-      - run: heroku config:set BUILD_NUMBER=$CIRCLE_BUILD_NUM -a $HEROKU_APP_NAME
-      - run: heroku config:set SECRET_KEY=$SECRET_KEY -a $HEROKU_APP_NAME
-      - run: heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a $HEROKU_APP_NAME
-      - run: heroku stack:set heroku-20 -a $HEROKU_APP_NAME
-      - run: heroku maintenance:off --app $HEROKU_APP_NAME
-      - heroku/deploy-via-git:
-          force: true
+      - run:
+          name: Build and push Docker image to Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push web -a=$HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web -a=$HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku stack:set heroku-20 -a=$HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a=$HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SECRET_KEY=$SECRET_KEY -a=$HEROKU_APP_NAME
 
 
 workflows:
