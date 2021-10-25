@@ -4,4 +4,4 @@
 lettings/__pycache__/
 oc_lettings_site/__pycache__/
 profiles/__pycache__/
-
+.env

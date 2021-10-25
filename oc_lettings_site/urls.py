@@ -4,9 +4,16 @@ from lettings import urls as lettings
 from profiles import urls as profiles
 from . import views
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+    return division_by_zero
+
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('lettings/', include(lettings, namespace="lettings")),
     path('profiles/', include(profiles, namespace='profiles')),
     path('admin/', admin.site.urls),
+    path('sentry-debug/', trigger_error),
 ]
