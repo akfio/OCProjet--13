@@ -40,20 +40,19 @@ jobs:
             docker tag $DOCKER_LOGIN/oc-lettings-8:$CIRCLE_SHA1 $DOCKER_LOGIN/oc-lettings-8:latest
             docker push $DOCKER_LOGIN/oc-lettings-8:latest
 
-
- deploy-to-Heroku:
-   executor: heroku/default
-   steps:
-     - checkout
-     - heroku/install
-     - run: heroku maintenance:on --app $HEROKU_APP_NAME
-     - run: heroku config:set BUILD_NUMBER=$CIRCLE_BUILD_NUM -a $HEROKU_APP_NAME
-     - run: heroku config:set SECRET_KEY=$SECRET_KEY -a $HEROKU_APP_NAME
-     - run: heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a $HEROKU_APP_NAME
-     - run: heroku stack:set heroku-20 -a $HEROKU_APP_NAME
-     - run: heroku maintenance:off --app $HEROKU_APP_NAME
-     - heroku/deploy-via-git:
-         force: true
+  deploy-to-Heroku:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - run: heroku maintenance:on --app $HEROKU_APP_NAME
+      - run: heroku config:set BUILD_NUMBER=$CIRCLE_BUILD_NUM -a $HEROKU_APP_NAME
+      - run: heroku config:set SECRET_KEY=$SECRET_KEY -a $HEROKU_APP_NAME
+      - run: heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a $HEROKU_APP_NAME
+      - run: heroku stack:set heroku-20 -a $HEROKU_APP_NAME
+      - run: heroku maintenance:off --app $HEROKU_APP_NAME
+      - heroku/deploy-via-git:
+          force: true
 
 
 workflows:
