@@ -93,18 +93,18 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 ##### Lorsqu'un commit est réalisé sur la branche master :
 
-Le workflow 'master' du Pipeline du projet va se lancer, et il est composé de plusieurs jobs :
+Le workflow 'master' du Pipeline du projet va se lancer, et il est composé de plusieurs jobs :  
 
-- le job 'build and test':
-Il va lancer les test avec Pytest
-Contrôler le linting PEP8 avec Flake8
+- le job 'build and test':  
+Il va lancer les test avec Pytest  
+Contrôler le linting PEP8 avec Flake8  
 
-- le job 'build-push-image-DockerHub':
-Il va créer une image Docker 
-Transmettre cette image vers le registre Dockerhub
+- le job 'build-push-image-DockerHub':  
+Il va créer une image Docker  
+Transmettre cette image vers le registre Dockerhub  
 
-- le job 'deploy-to-Heroku':
-Il va déployer l'image docker vers Heroku
+- le job 'deploy-to-Heroku':  
+Il va déployer l'image docker vers Heroku  
 
 
 ##### Lorsqu'un commit est réalisé sur une autre branche :
@@ -130,24 +130,25 @@ Ccéation des variables suivantes :
  -  HEROKU_APP_NAME : le nom de l'application (ici oc-lettings-8)
 
 
+--------------------------------------------------------------------------------------------------------------
 
 #### DockerHub : 
 
-Le repository stockant en ligne l'image docker de l'application :
+Le repository stockant en ligne l'image docker de l'application :  
 
-https://hub.docker.com/r/akfio/oc-lettings-8 
+https://hub.docker.com/r/akfio/oc-lettings-8   
 
-Récupérer l'application en local et lancer avec une seule commande : 
+Récupérer l'application en local et lancer avec une seule commande :  
 
 ```python
 docker run -it --publish 8000:8000 --name OCP13 akfio/oc-lettings-8:latest
 ```
 
-#### Heroku : 
+#### Heroku :  
 
-C'est l'hebergeur de l'application.
+C'est l'hebergeur de l'application.  
 
-Si il faut recréer l'application voici la démarche à suivre : 
+Si il faut recréer l'application voici la démarche à suivre :  
 
 ```python
 heroku create oc-lettings-8
@@ -165,7 +166,7 @@ heroku run python manage.py loaddata 'oc-lettings.json'
 
 #### Sentry : 
 
-https://sentry.io/organizations/akfio/projects/oc-lettings/?project=6034130
+https://sentry.io/organizations/akfio/projects/oc-lettings/?project=6034130  
 
 Sentry est utilisé pour faire du monitoring ou détecter les possibles bugs de l'application.
 Pour l'utiliser, le package sentry_sdk est utilisé dans le settings.py et sa variable est enregistré dans CircleCi
