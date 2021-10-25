@@ -50,11 +50,11 @@ jobs:
           command: |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push web -a $APP_NAME
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web -a=$APP_NAME
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku stack:set heroku-20 -a=$APP_NAME
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a=$APP_NAME
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SECRET_KEY=$SECRET_KEY -a=$APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push web -a=$HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web -a=$HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku stack:set heroku-20 -a=$HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a=$HEROKU_APP_NAME
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SECRET_KEY=$SECRET_KEY -a=$HEROKU_APP_NAME
 
 
 workflows:
