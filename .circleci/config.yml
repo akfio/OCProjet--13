@@ -71,3 +71,10 @@ workflows:
             filters:
               branches:
                 only: master
+   
+    workflow-others:
+    jobs:
+      - build-and-test:
+          filters:
+            branches:
+              ignore: master
