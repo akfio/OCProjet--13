@@ -19,6 +19,7 @@ class TestLettingsView(TestCase):
         assert expected.encode() in response.content
 
     def test_lettings_letting(self):
-        response = self.client.get(reverse('lettings:letting', kwargs={'letting_id': self.title.id}))
+        response = self.client.get(reverse('lettings:letting',
+                                           kwargs={'letting_id': self.title.id}))
         expected = "<h1>" + str(self.title) + "</h1>"
         assert expected.encode() in response.content
