@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   python: circleci/python@1.2
   docker: circleci/docker@1.7.0
-  heroku: circleci/heroku@1.2.6
 
 jobs:
   build-and-test:
@@ -43,7 +42,7 @@ jobs:
 
 
   deploy-to-Heroku:
-    executor: heroku/default
+    machine: true
     steps:
       - checkout
       - run:
@@ -56,7 +55,6 @@ jobs:
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku stack:set heroku-20 -a=$HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a=$HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SECRET_KEY=$SECRET_KEY -a=$HEROKU_APP_NAME
-      - heroku/deploy-via-git
 
 
 workflows:
