@@ -47,15 +47,11 @@ jobs:
     steps:
       - checkout
       - heroku/install
-      - run:
-          name: Build and push Docker image to Heroku
-          command: |
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push web -a=$HEROKU_APP_NAME
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release web -a=$HEROKU_APP_NAME
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku stack:set heroku-20 -a=$HEROKU_APP_NAME
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a=$HEROKU_APP_NAME
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SECRET_KEY=$SECRET_KEY -a=$HEROKU_APP_NAME
+      - run: heroku maintenance:on --app $HEROKU_APP_NAME
+      - run: heroku config:set SECRET_KEY=$SECRET_KEY -a=$HEROKU_APP_NAME
+      - run: heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a=$HEROKU_APP_NAME
+      - run: heroku stack:set heroku-20 -a $HEROKU_APP_NAME
+      - run: heroku maintenance:off --app $HEROKU_APP_NAME
       - heroku/deploy-via-git
 
 
