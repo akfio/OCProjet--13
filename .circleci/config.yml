@@ -72,7 +72,7 @@ workflows:
               branches:
                 only: master
    
-    workflow-others:
+  workflow-others:
     jobs:
       - build-and-test:
           filters:
