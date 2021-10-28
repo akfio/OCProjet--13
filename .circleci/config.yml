@@ -63,7 +63,7 @@ jobs:
               machine git.heroku.com
                 login $HEROKU_EMAIL
                 password $HEROKU_TOKEN
-            EOF>>
+            EOF/>>
       - run: heroku git:remote -a=$HEROKU_APP_NAME
       - run: git push heroku master
 
