@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Heroku login
           command: |
-            cat > ~/.netrc <<EOF
+            echo > ~/.netrc <<EOF
               machine api.heroku.com
                 login $HEROKU_EMAIL
                 password $HEROKU_TOKEN
