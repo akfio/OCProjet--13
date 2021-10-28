@@ -64,11 +64,8 @@ jobs:
                 login $HEROKU_EMAIL
                 password $HEROKU_TOKEN
             EOF
-      - run:
-          name: git push heroku
-            command: |
-              heroku git:remote -a=$HEROKU_APP_NAME
-              git push heroku master
+      - run: heroku git:remote -a=$HEROKU_APP_NAME
+      - run: git push heroku master
 
 
 workflows:
