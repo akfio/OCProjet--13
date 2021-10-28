@@ -67,7 +67,11 @@ jobs:
       - run:
           name: Add Heroku remote
           command: heroku git:remote -a=$HEROKU_APP_NAME
-      - run: git push heroku master
+      - run:
+          name: Push to Heroku
+          command: git push heroku master
+
+
 
 
 workflows:
