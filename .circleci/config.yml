@@ -53,6 +53,9 @@ jobs:
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku stack:set heroku-20 -a=$HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SENTRY_SDK_DSN=$SENTRY_SDK_DSN -a=$HEROKU_APP_NAME
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku config:set SECRET_KEY=$SECRET_KEY -a=$HEROKU_APP_NAME
+      - run:
+          name: Login to heroku and push to heroku master
+            heroku login -i --email --password $HEROKU_TOKEN
             heroku git:remote -a=$HEROKU_APP_NAME
             git push heroku master
 
