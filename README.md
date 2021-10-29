@@ -121,13 +121,15 @@ Ccéation des variables suivantes :
   
  - DOCKER_TOKEN : Token d'authentification recupérable dans GitHub via `Account settings`, `Security`, `New Access Token`
  
- -  HEROKU_API_TOKEN : Token Heroku récupéré avec la commande: ```python heroku authorizations:create```
+ - HEROKU_API_TOKEN : Token Heroku récupéré avec la commande: ```python heroku authorizations:create```
  
- -  SENTRY_SDK_DNS : Url de Sentry 
+ - SENTRY_SDK_DNS : Url de Sentry 
  
- -  SECRET_KEY : Secret key Django
+ - SECRET_KEY : Secret key Django
  
- -  HEROKU_APP_NAME : le nom de l'application (ici oc-lettings-8)
+ - HEROKU_APP_NAME : le nom de l'application (ici oc-lettings-8) 
+
+ - HEROKU_EMAIL : l'email de connexion Heroku
 
 
 --------------------------------------------------------------------------------------------------------------
