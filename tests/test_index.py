@@ -5,5 +5,5 @@ client = Client()
 
 def test_index(client):
     response = client.get('')
-    expected = '<h1>Welcome to Holiday Homes</h1>'
+    expected = '<title>Holiday Homes</title>'
     assert expected.encode() in response.content

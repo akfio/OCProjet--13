@@ -15,11 +15,11 @@ class TestLettingsView(TestCase):
 
     def test_lettings_index(self):
         response = self.client.get(reverse('lettings:index'))
-        expected = "<h1>Lettings</h1>"
+        expected = "<title>Lettings</title>"
         assert expected.encode() in response.content
 
     def test_lettings_letting(self):
         response = self.client.get(reverse('lettings:letting',
                                            kwargs={'letting_id': self.title.id}))
-        expected = "<h1>" + str(self.title) + "</h1>"
+        expected = "<title>" + str(self.title) + "</title>"
         assert expected.encode() in response.content

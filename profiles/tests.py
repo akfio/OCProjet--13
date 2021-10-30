@@ -5,7 +5,7 @@ from .models import Profile
 from django.contrib.auth.models import User
 
 
-class TestLettingsView(TestCase):
+class TestProfilesView(TestCase):
     client = Client()
 
     @classmethod
@@ -15,10 +15,10 @@ class TestLettingsView(TestCase):
 
     def test_profiles_index(self):
         response = self.client.get(reverse('profiles:index'))
-        expected = "<h1>Profiles</h1>"
+        expected = "<title>Profiles</title>"
         assert expected.encode() in response.content
 
-    def test_lettings_letting(self):
+    def test_profiles_letting(self):
         response = self.client.get(reverse('profiles:profile', kwargs={'username': self.user}))
-        expected = "<h1>" + str(self.user) + "</h1>"
+        expected = "<title>" + str(self.user) + "</title>"
         assert expected.encode() in response.content
