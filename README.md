@@ -158,8 +158,6 @@ heroku create oc-lettings-8
 Lancer le pipline CircleCI, 
 puis:
 ```python
-git push heroku master
-
 heroku run python3 manage.py migrate
 
 heroku run python manage.py loaddata 'oc-lettings.json'
